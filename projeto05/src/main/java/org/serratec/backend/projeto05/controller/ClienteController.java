@@ -1,7 +1,10 @@
-package or.serratec.backend.projeto05.projeto05.controller;
+package org.serratec.backend.projeto05.controller;
 
 import java.util.List;
 
+import org.serratec.backend.projeto05.DTO.ClienteDTO;
+import org.serratec.backend.projeto05.model.Cliente;
+import org.serratec.backend.projeto05.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,50 +18,44 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import or.serratec.backend.projeto05.projeto05.model.Cliente;
-import or.serratec.backend.projeto05.projeto05.service.ClienteService;
-
 @RestController
 @RequestMapping("/cliente")
 public class ClienteController {
 	
 	@Autowired
 	ClienteService clienteService;
-	
+
 	@PostMapping("/salvar")
-	public ResponseEntity<Void> salvar (@RequestBody Cliente cliente){
-		clienteService.salvar(cliente);
+	public ResponseEntity<Void> salvar(@RequestBody ClienteDTO clienteDTO) {
+		clienteService.salvar(clienteDTO);
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
-	
-	
+
 	@GetMapping("/buscar{idCliente")
-	public ResponseEntity<Cliente> buscarPorId(@PathVariable Integer idCliente){
+	public ResponseEntity<ClienteDTO> buscarPorId(@PathVariable Integer idCliente) {
 		return ResponseEntity.ok(clienteService.buscarPorId(idCliente));
 	}
-	
+
 	@PutMapping("/atualizar{idCliente")
-	public ResponseEntity<Void> delete(@PathVariable Integer idCliente, @RequestBody Cliente cliente){
-		clienteService.atualizar(idCliente, cliente);
+	public ResponseEntity<Void> delete(@PathVariable Integer idCliente, @RequestBody ClienteDTO clienteDTO) {
+		clienteService.atualizar(idCliente, clienteDTO);
 		return new ResponseEntity<>(HttpStatus.ACCEPTED);
 	}
-	
+
 	@DeleteMapping("/delete/{posicaoLista}")
 	public ResponseEntity<Void> deletar(@PathVariable Integer idCliente) {
 		clienteService.delete(idCliente);
 		return new ResponseEntity<>(HttpStatus.ACCEPTED);
-	}	
-	
-	@GetMapping("/lista")
-	public ResponseEntity<List<Cliente>> listaTodos(){
-		return ResponseEntity.ok(clienteService.ListarTodos());		
 	}
-	
+
+	@GetMapping("/lista")
+	public ResponseEntity<List<Cliente>> listaTodos() {
+		return ResponseEntity.ok(clienteService.ListarTodos());
+	}
+
 	@PostMapping("/salvar-lista")
-	public ResponseEntity<Void> salvarLista(@RequestBody List<Cliente> listaCliente){
-	clienteService.salvarTodos(listaCliente);
-	return new ResponseEntity<>(HttpStatus.CREATED);
+	public ResponseEntity<Void> salvarLista(@RequestBody List<Cliente> listaCliente) {
+		clienteService.salvarTodos(listaCliente);
+		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 }
-	
-

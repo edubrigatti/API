@@ -1,5 +1,6 @@
-package or.serratec.backend.projeto05.projeto05.model;
+package org.serratec.backend.projeto05.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -8,14 +9,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name="cliente")
-public class Cliente {
+public class Cliente implements Serializable{
 	
-	
+
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="cliente_cd_id")
@@ -24,8 +28,9 @@ public class Cliente {
 	@Column(name="cliente_tx_nome")
 	private String nome;
 	
-	@Column(name="cliente_tx_cpf")
-	private String cpf;	
+	@Size(max = 11)
+	@Column(name="cliente_tx_cpf",unique = true)
+	private String cpf;
 	
 	@Column(name="cliente_tx_numero_telefone")
 	private String numeroTelefone;
@@ -37,57 +42,45 @@ public class Cliente {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dataNascimento;
 	
-		
 	public Cliente() {}
-
-	public Integer getId() {
+	
+	
+	public Integer getIdCliente() {
 		return idCliente;
 	}
-
-	public void setId(Integer idCliented) {
+	public void setIdCliente(Integer idCliente) {
 		this.idCliente = idCliente;
 	}
-
 	public String getNome() {
 		return nome;
 	}
-
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
 	public String getCpf() {
 		return cpf;
 	}
-
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
-
 	public String getNumeroTelefone() {
 		return numeroTelefone;
 	}
-
 	public void setNumeroTelefone(String numeroTelefone) {
 		this.numeroTelefone = numeroTelefone;
 	}
-
 	public String getEmail() {
 		return email;
 	}
-
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
 	public Date getDataNascimento() {
 		return dataNascimento;
 	}
-
 	public void setDataNascimento(Date dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
-	
 	
 	
 

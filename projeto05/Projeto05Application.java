@@ -1,4 +1,4 @@
-package or.serratec.backend.projeto05.projeto05;
+package org.serratec.backend.projeto05;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
