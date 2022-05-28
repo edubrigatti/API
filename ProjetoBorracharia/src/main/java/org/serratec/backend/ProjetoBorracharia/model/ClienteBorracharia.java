@@ -1,20 +1,23 @@
-package or.serratec.backend.projeto05.model;
+package org.serratec.backend.ProjetoBorracharia.model;
 
-import java.util.Date;
+import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.springframework.format.annotation.DateTimeFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="cliente")
-public class Cliente {
+public class ClienteBorracharia implements Serializable {
 	
+	private static final long serialVersionUID = 1l;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,24 +30,23 @@ public class Cliente {
 	@Column(name="cliente_tx_cpf")
 	private String cpf;	
 	
-	@Column(name="cliente_tx_numero_telefone")
-	private String numeroTelefone;
-	
 	@Column(name="cliente_tx_email")
 	private String email;
 	
-	@Column(name="cliente_dt_nascimento", unique = true)
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date dataNascimento;
+	@Column(name="cliente_cd_id_carro")
+	private Integer idCarro;
+//	
+//	@JsonIgnore
+//	@OneToMany(mappedBy = "cliente")
+//	private List<Carro> listaCarro;
 	
-		
-	public Cliente() {}
+	public ClienteBorracharia () {}
 
-	public Integer getId() {
+	public Integer getIdCliente() {
 		return idCliente;
 	}
 
-	public void setId(Integer idCliented) {
+	public void setIdCliente(Integer idCliente) {
 		this.idCliente = idCliente;
 	}
 
@@ -64,14 +66,6 @@ public class Cliente {
 		this.cpf = cpf;
 	}
 
-	public String getNumeroTelefone() {
-		return numeroTelefone;
-	}
-
-	public void setNumeroTelefone(String numeroTelefone) {
-		this.numeroTelefone = numeroTelefone;
-	}
-
 	public String getEmail() {
 		return email;
 	}
@@ -79,15 +73,15 @@ public class Cliente {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
-	public Date getDataNascimento() {
-		return dataNascimento;
-	}
-
-	public void setDataNascimento(Date dataNascimento) {
-		this.dataNascimento = dataNascimento;
-	}
 	
+	public Integer getIdCarro() {
+		return idCarro;
+	}
+
+	public void setIdCarro(Integer idCarro) {
+		this.idCarro = idCarro;
+	}
+
 	
 	
 
